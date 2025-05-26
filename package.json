@@ -13,10 +13,10 @@
     "nextra-theme-blog": "^2.13.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rss": "^1.2.2"
-    "tailwindcss": "^3.4.1",
-  "postcss": "^8.4.38",
-  "autoprefixer": "^10.4.17"
+    "rss": "^1.2.2",
+"tailwindcss": "^3.4.1",
+"postcss": "^8.4.38",
+"autoprefixer": "^10.4.17"
   },
   "prettier": {
     "arrowParens": "always",

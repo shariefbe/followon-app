@@ -1,6 +1,6 @@
 import { ClerkProvider } from '@clerk/clerk-react'
 
-const clerkFrontendApi = 'process.env.NEXT_PUBLIC_CLERK_FRONTEND_API'
+const clerkFrontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API
 
 function MyApp({ Component, pageProps }) {
   return (

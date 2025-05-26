@@ -1,13 +1,8 @@
-import { ClerkProvider } from '@clerk/clerk-react'
-import { useRouter } from 'next/router'
-
-const clerkPubKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+import { ClerkProvider } from '@clerk/nextjs'
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter()
-
   return (
-    <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => router.push(to)}>
+    <ClerkProvider>
       <Component {...pageProps} />
     </ClerkProvider>
   )

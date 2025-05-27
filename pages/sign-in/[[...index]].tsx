@@ -1,4 +1,4 @@
-import { SignIn } from '@clerk/nextjs'
+import { SignIn } from "@clerk/nextjs"
 
 export default function SignInPage() {
   return (
@@ -8,7 +8,7 @@ export default function SignInPage() {
           path="/sign-in"
           routing="path"
           signUpUrl="/sign-up"
-          afterSignInUrl="app/dashboard"
+          afterSignInUrl="/dashboard"  // ✅ should point here
         />
       </div>
     </div>

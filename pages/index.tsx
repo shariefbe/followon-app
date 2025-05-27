@@ -27,21 +27,24 @@ export default function HomePage() {
         </SignedIn>
       </section>
 
-      {/* How It Works */}
-      <section className="px-6 py-16 text-center bg-white">
-        <h2 className="text-3xl font-semibold mb-10">How It Works</h2>
-        <div className="grid md:grid-cols-3 gap-10">
-          <div>
-            <h3 className="text-xl font-bold mb-2">Step 1</h3>
-            <p>Enter customer name, mobile number, and when you sent the catalog.</p>
+      {/* How It Works - 3 Step Layout */}
+      <section className="px-6 py-20 bg-white text-center">
+        <h2 className="text-3xl font-bold mb-12">How It Works</h2>
+        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          <div className="bg-blue-50 p-6 rounded-xl shadow-md">
+            <div className="text-4xl font-bold text-blue-600 mb-4">1</div>
+            <h3 className="text-xl font-semibold mb-2">Enter Lead Info</h3>
+            <p className="text-gray-700">Add the customer name, phone number & the catalog sent date.</p>
           </div>
-          <div>
-            <h3 className="text-xl font-bold mb-2">Step 2</h3>
-            <p>Set how many days later you want a follow-up reminder.</p>
+          <div className="bg-blue-50 p-6 rounded-xl shadow-md">
+            <div className="text-4xl font-bold text-blue-600 mb-4">2</div>
+            <h3 className="text-xl font-semibold mb-2">Set Follow-up Day</h3>
+            <p className="text-gray-700">Choose a number of days after which you want to follow up.</p>
           </div>
-          <div>
-            <h3 className="text-xl font-bold mb-2">Step 3</h3>
-            <p>We remind you to follow up on time. More conversions, less headache!</p>
+          <div className="bg-blue-50 p-6 rounded-xl shadow-md">
+            <div className="text-4xl font-bold text-blue-600 mb-4">3</div>
+            <h3 className="text-xl font-semibold mb-2">Get Reminder</h3>
+            <p className="text-gray-700">We'll notify you on time so you can follow up and convert better!</p>
           </div>
         </div>
       </section>
@@ -85,7 +88,7 @@ export default function HomePage() {
         <h2 className="text-3xl font-semibold mb-10">What Users Say</h2>
         <div className="max-w-3xl mx-auto">
           <blockquote className="text-lg italic">“FollowOn made me stop using sticky notes. My conversions increased!”</blockquote>
-          <p className="mt-2 font-bold">– A jewelry seller from Tamil Nadu</p>
+          <p className="mt-2 font-bold">– South Jewels from Tamil Nadu</p>
         </div>
       </section>
 

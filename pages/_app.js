@@ -1,13 +1,17 @@
+// pages/_app.tsx
 import { ClerkProvider } from '@clerk/nextjs'
 import { useRouter } from 'next/router'
-
-const clerkFrontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
-  const { pathname } = useRouter()
+  const router = useRouter()
 
   return (
-    <ClerkProvider frontendApi={clerkFrontendApi} navigate={(to) => window.history.pushState(null, '', to)}>
+    <ClerkProvider
+      routerPush={router.push}
+      routerReplace={router.replace}
+      router={router}
+    >
       <Component {...pageProps} />
     </ClerkProvider>
   )

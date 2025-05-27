@@ -5,19 +5,19 @@ import Image from 'next/image'
 
 export default function HomePage() {
   return (
-    <div className="font-sans">
+    <div className="font-sans scroll-smooth">
       {/* Navigation Bar */}
-      <nav className="bg-white shadow sticky top-0 z-50">
+      <nav className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold text-blue-600">
             FollowOn
           </Link>
-          <div className="space-x-6">
-            <a href="#features" className="text-gray-700 hover:text-blue-600">Features</a>
-            <a href="#pricing" className="text-gray-700 hover:text-blue-600">Pricing</a>
+          <div className="space-x-6 text-sm font-medium">
+            <a href="#features" className="text-gray-700 hover:text-blue-600 transition duration-200">Features</a>
+            <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition duration-200">Pricing</a>
             <SignedOut>
               <SignInButton>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200">
                   Sign In
                 </button>
               </SignInButton>
@@ -53,11 +53,11 @@ export default function HomePage() {
         </div>
         <div className="md:w-1/2 mb-8 md:mb-0">
           <Image
-            src="https://images.unsplash.com/photo-1581091215367-5c2cc5b4f43b"
+            src="https://source.unsplash.com/featured/?business,reminder"
             alt="Hero"
             width={600}
             height={400}
-            className="rounded-xl shadow-lg"
+            className="rounded-xl shadow-lg object-cover"
           />
         </div>
       </section>
@@ -104,11 +104,11 @@ export default function HomePage() {
       <section className="px-6 py-16 text-center">
         <h2 className="text-3xl font-semibold mb-10">Screenshots</h2>
         <Image
-          src="https://images.unsplash.com/photo-1581091210600-725b5b4117c1"
+          src="https://source.unsplash.com/featured/?dashboard,analytics"
           alt="Demo Screenshot"
           width={800}
           height={400}
-          className="mx-auto rounded-xl shadow"
+          className="mx-auto rounded-xl shadow object-cover"
         />
       </section>
 
@@ -119,17 +119,17 @@ export default function HomePage() {
           <div className="bg-gray-100 p-8 rounded-xl shadow">
             <h3 className="text-xl font-bold">Free</h3>
             <p className="text-gray-600 mt-2">Up to 10 follow-ups per month</p>
-            <p className="mt-4 font-bold text-2xl">₹0</p>
+            <p className="mt-4 font-bold text-2xl">$0</p>
           </div>
           <div className="bg-gray-100 p-8 rounded-xl shadow">
             <h3 className="text-xl font-bold">Pro</h3>
             <p className="text-gray-600 mt-2">Up to 200 follow-ups</p>
-            <p className="mt-4 font-bold text-2xl">₹699/month</p>
+            <p className="mt-4 font-bold text-2xl">$8/month</p>
           </div>
           <div className="bg-gray-100 p-8 rounded-xl shadow">
             <h3 className="text-xl font-bold">Unlimited</h3>
             <p className="text-gray-600 mt-2">Unlimited follow-ups</p>
-            <p className="mt-4 font-bold text-2xl">₹1599/month</p>
+            <p className="mt-4 font-bold text-2xl">$20/month</p>
           </div>
         </div>
       </section>
@@ -139,7 +139,7 @@ export default function HomePage() {
         <h2 className="text-3xl font-semibold mb-10">What Users Say</h2>
         <div className="max-w-3xl mx-auto">
           <blockquote className="text-lg italic">“FollowOn made me stop using sticky notes. My conversions increased!”</blockquote>
-          <p className="mt-2 font-bold">– A jewelry seller from Tamil Nadu</p>
+          <p className="mt-2 font-bold">– South Jewels from Tamil Nadu</p>
         </div>
       </section>
 

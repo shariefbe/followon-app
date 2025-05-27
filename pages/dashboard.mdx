@@ -1,11 +1,15 @@
-// pages/dashboard.tsx
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs"
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 
 export default function Dashboard() {
   return (
     <>
       <SignedIn>
-        <div className="min-h-screen bg-gray-100 px-4 py-12 flex items-center justify-center">
+        <div className="min-h-screen bg-gray-100 px-4 py-12 flex items-center justify-center relative">
+          {/* Logout/User button */}
+          <div className="absolute top-4 right-4">
+            <UserButton afterSignOutUrl="/" />
+          </div>
+
           <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-8">
             <h1 className="text-2xl font-bold text-blue-700 mb-4">Add Customer Lead</h1>
             <form className="space-y-4">
@@ -42,8 +46,8 @@ export default function Dashboard() {
       </SignedIn>
 
       <SignedOut>
-        <div className="min-h-screen flex items-center justify-center text-xl">
-          Please <SignInButton redirectUrl="/dashboard" /> to view this page.
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <SignInButton />
         </div>
       </SignedOut>
     </>

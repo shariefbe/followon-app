@@ -3,9 +3,10 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 export default function Dashboard() {
   return (
     <>
+      {/* If user is signed in */}
       <SignedIn>
         <div className="min-h-screen bg-gray-100 px-4 py-12 flex items-center justify-center relative">
-          {/* Logout/User button */}
+          {/* Logout Button */}
           <div className="absolute top-4 right-4">
             <UserButton afterSignOutUrl="/" />
           </div>
@@ -45,9 +46,13 @@ export default function Dashboard() {
         </div>
       </SignedIn>
 
+      {/* If user is not signed in */}
       <SignedOut>
         <div className="min-h-screen bg-white flex items-center justify-center">
-          <SignInButton />
+          <div className="text-center">
+            <p className="mb-4 text-lg text-gray-700">You must sign in to access the dashboard.</p>
+            <SignInButton redirectUrl="/dashboard" />
+          </div>
         </div>
       </SignedOut>
     </>

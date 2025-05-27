@@ -1,98 +1,97 @@
+// pages/dashboard.tsx
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import { useState } from "react"
 
 export default function Dashboard() {
-  const [followUpType, setFollowUpType] = useState("catalog")
+  const [followType, setFollowType] = useState("catalog")
 
   return (
     <>
-      {/* If user is signed in */}
+      {/* Protected content only when signed in */}
       <SignedIn>
-        <div className="min-h-screen bg-gray-100 px-4 py-12 flex flex-col md:flex-row gap-8 justify-center items-start relative">
-          {/* Logout Button */}
+        <div className="min-h-screen bg-gray-100 p-6 flex flex-col md:flex-row gap-6">
+          {/* Top-right Logout */}
           <div className="absolute top-4 right-4">
             <UserButton afterSignOutUrl="/" />
           </div>
 
-          {/* Form Section */}
-          <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-8">
-            <h1 className="text-2xl font-bold text-blue-700 mb-4">Add Follow-Up Entry</h1>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Select Follow-Up Type</label>
-              <select
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={followUpType}
-                onChange={(e) => setFollowUpType(e.target.value)}
+          {/* Left: Follow-up Type Form */}
+          <div className="bg-white rounded-xl shadow-md p-6 w-full md:w-1/2">
+            <h1 className="text-2xl font-bold text-blue-700 mb-4">Add Follow-Up</h1>
+
+            {/* Follow-up Type Selection */}
+            <div className="mb-4 flex gap-2">
+              <button
+                className={`px-4 py-2 rounded-md ${followType === "catalog" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+                onClick={() => setFollowType("catalog")}
               >
-                <option value="catalog">Catalog Sent</option>
-                <option value="bought">Bought Today</option>
-                <option value="payment">Payment Intimation</option>
-              </select>
+                Catalog Sent
+              </button>
+              <button
+                className={`px-4 py-2 rounded-md ${followType === "bought" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+                onClick={() => setFollowType("bought")}
+              >
+                Bought Today
+              </button>
+              <button
+                className={`px-4 py-2 rounded-md ${followType === "payment" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+                onClick={() => setFollowType("payment")}
+              >
+                Payment Promise
+              </button>
             </div>
 
-            {/* Dynamic Form Fields */}
+            {/* Form Based on Follow-Up Type */}
             <form className="space-y-4">
-              <input
-                type="text"
-                placeholder="Customer Name"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="tel"
-                placeholder="Mobile Number"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              {followUpType === "catalog" && (
-                <input
-                  type="date"
-                  placeholder="Catalog Sent Date"
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+              <input type="text" placeholder="Customer Name" className="w-full px-4 py-2 border rounded-md" />
+              <input type="tel" placeholder="Mobile Number" className="w-full px-4 py-2 border rounded-md" />
+              {followType === "catalog" && (
+                <>
+                  <input type="date" placeholder="Catalog Sent Date" className="w-full px-4 py-2 border rounded-md" />
+                  <select className="w-full px-4 py-2 border rounded-md">
+                    <option value="">Reminder After...</option>
+                    <option value="3">3 Days</option>
+                    <option value="5">5 Days</option>
+                    <option value="7">7 Days</option>
+                  </select>
+                </>
               )}
-              {followUpType === "bought" && (
-                <input
-                  type="date"
-                  placeholder="Purchase Date"
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+              {followType === "bought" && (
+                <>
+                  <input type="date" placeholder="Bought Date" className="w-full px-4 py-2 border rounded-md" />
+                  <select className="w-full px-4 py-2 border rounded-md">
+                    <option value="">Reminder After...</option>
+                    <option value="3">3 Days</option>
+                    <option value="5">5 Days</option>
+                    <option value="7">7 Days</option>
+                  </select>
+                </>
               )}
-              {followUpType === "payment" && (
-                <input
-                  type="date"
-                  placeholder="Payment Date Promised"
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+              {followType === "payment" && (
+                <>
+                  <input type="date" placeholder="Payment Date Promised" className="w-full px-4 py-2 border rounded-md" />
+                </>
               )}
-              <select className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="">Reminder After...</option>
-                <option value="3">3 Days</option>
-                <option value="5">5 Days</option>
-                <option value="7">7 Days</option>
-              </select>
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-              >
-                Save Lead
-              </button>
+              <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Save</button>
             </form>
           </div>
 
-          {/* Today's Follow-Ups Section */}
-          <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-8">
-            <h2 className="text-xl font-bold text-blue-700 mb-4">Today's Follow-Ups</h2>
-            <ul className="space-y-2 text-sm text-gray-700">
-              <li>📦 Catalog Sent – Priya – 9999999999</li>
-              <li>🛍 Bought Today – Ravi – 9876543210</li>
-              <li>💰 Payment Intimation – Asha – 9123456780</li>
+          {/* Right: Today's Follow-Ups */}
+          <div className="bg-white rounded-xl shadow-md p-6 w-full md:w-1/2">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">Today's Follow-ups</h2>
+            <ul className="space-y-2 text-gray-700">
+              <li>📦 Priya (Catalog Follow-up)</li>
+              <li>💰 Arjun (Payment Reminder)</li>
+              <li>🛍️ Divya (Bought Today Follow-up)</li>
+              <li className="text-gray-400">(This is static demo list)</li>
             </ul>
           </div>
         </div>
       </SignedIn>
 
-      {/* If user is not signed in */}
+      {/* Sign-in prompt */}
       <SignedOut>
-        <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="min-h-screen flex items-center justify-center bg-white">
           <div className="text-center">
             <p className="mb-4 text-lg text-gray-700">You must sign in to access the dashboard.</p>
             <SignInButton redirectUrl="/dashboard" />

@@ -9,20 +9,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { name, phone, date, reminderDays, type } = req.body
 
-  console.log("Incoming lead data:", req.body) // ✅ Debug log
-
-  const { error } = await supabase.from('customer_leads').insert({
-    name,
-    mobile: phone,
-    catalog_date: date,
-    reminder_days: reminderDays,
-    follow_type: type || null  // optional: if you added this column
-  })
-
-  if (error) {
-    console.error("Supabase Insert Error:", error) // ✅ Log the actual error
-    return res.status(500).json({ error: error.message })
+  if (!name || !phone || !date) {
+    return res.status(400).json({ error: 'Missing fields' })
   }
 
-  res.status(200).json({ success: true })
+  const { error } = await supabase.from('customer_leads').insert([
+    {
+      name,
+      mobile: phone,
+      catalog_date: date,
+      reminder_days: reminderDays,
+      follow_type: type
+    }
+  ])
+
+  if (error) {
+    console.error('Supabase insert error:', error)
+    return res.status(500).json({ error: 'Database insert failed', detail: error.message })
+  }
+
+  return res.status(200).json({ message: 'Lead saved successfully' })
 }

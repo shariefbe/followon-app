@@ -5,12 +5,12 @@ export default authMiddleware({
     "/",
     "/sign-in",
     "/sign-up",
-    "/sign-up/verify-email-address", // Important!
+    "/sign-up/verify-email-address",
     "/api/webhook/clerk"
   ],
   ignoredRoutes: ["/favicon.ico"]
 });
 
 export const config = {
-  matcher: ["/((?!_next|.*\\..*).*)"]
+  matcher: ["/((?!_next|.*\\..*).*)"],
 };

@@ -1,7 +1,5 @@
-// pages/index.tsx
 import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
-import Image from 'next/image'
 
 export default function HomePage() {
   return (
@@ -52,12 +50,10 @@ export default function HomePage() {
           </SignedIn>
         </div>
         <div className="md:w-1/2 mb-8 md:mb-0">
-          <Image
+          <img
             src="https://source.unsplash.com/featured/?business,reminder"
             alt="Hero"
-            width={600}
-            height={400}
-            className="rounded-xl shadow-lg object-cover"
+            className="rounded-xl shadow-lg object-cover w-full max-w-md mx-auto"
           />
         </div>
       </section>
@@ -103,12 +99,10 @@ export default function HomePage() {
       {/* Screenshots / Demo */}
       <section className="px-6 py-16 text-center">
         <h2 className="text-3xl font-semibold mb-10">Screenshots</h2>
-        <Image
+        <img
           src="https://source.unsplash.com/featured/?dashboard,analytics"
           alt="Demo Screenshot"
-          width={800}
-          height={400}
-          className="mx-auto rounded-xl shadow object-cover"
+          className="mx-auto rounded-xl shadow object-cover w-full max-w-3xl"
         />
       </section>
 

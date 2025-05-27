@@ -17,12 +17,10 @@ export default function Dashboard() {
     reminderDays: ""
   })
 
-  // 🧠 Log to check dashboard is loading
   useEffect(() => {
     console.log("✅ Dashboard page loaded")
   }, [])
 
-  // ✅ Handle redirection only *after* Clerk has loaded
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
       router.push("/")
@@ -42,10 +40,14 @@ export default function Dashboard() {
       })
       alert("Lead saved successfully!")
       setFormData({ name: "", phone: "", date: "", reminderDays: "" })
-    } catch (error) {
-      console.error("❌ API Error:", error)
+    } catch (error: any) {
+      console.error("❌ API Error:", error?.response?.data || error.message)
       alert("Failed to save lead")
     }
+  }
+
+  if (!isLoaded) {
+    return <div className="p-6 text-gray-600">Loading...</div>
   }
 
   return (

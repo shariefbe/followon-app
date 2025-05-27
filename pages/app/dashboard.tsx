@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react"
 import { useUser, useAuth } from "@clerk/nextjs"
+import { UserButton } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 

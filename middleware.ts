@@ -5,21 +5,12 @@ export default authMiddleware({
     "/",
     "/sign-in",
     "/sign-up",
-    "/sign-up/verify-email-address",
-    "/api/webhook/clerk" // if you're using Clerk webhooks in the future
+    "/sign-up/verify-email-address", // Important!
+    "/api/webhook/clerk"
   ],
-  ignoredRoutes: [
-    "/favicon.ico"
-  ]
+  ignoredRoutes: ["/favicon.ico"]
 });
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next (static files)
-     * - static files like .css, .js, etc.
-     */
-    "/((?!_next|.*\\..*).*)"
-  ]
+  matcher: ["/((?!_next|.*\\..*).*)"]
 };

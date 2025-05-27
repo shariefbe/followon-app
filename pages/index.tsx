@@ -1,35 +1,65 @@
 // pages/index.tsx
 import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import Image from 'next/image'
 
 export default function HomePage() {
   return (
     <div className="font-sans">
-      {/* Hero Section */}
-      <section className="min-h-screen flex flex-col justify-center items-center bg-blue-50 text-center px-4 py-20">
-        <img
-          src="https://images.unsplash.com/photo-1581090700227-1e8b98d9d4c5?auto=format&fit=crop&w=800&q=80"
-          alt="FollowOn Hero"
-          className="w-full max-w-xl mb-8 rounded-xl shadow-lg"
-        />
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Simplify Your Customer Follow-ups</h1>
-        <p className="text-lg md:text-xl text-gray-700 mb-6 max-w-xl">
-          FollowOn helps businesses remember customer promises, follow up smartly, and never lose a sale.
-        </p>
-        <SignedOut>
-          <SignInButton>
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-              Get Started
-            </button>
-          </SignInButton>
-        </SignedOut>
-        <SignedIn>
-          <Link href="/dashboard">
-            <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
-              Go to Dashboard
-            </button>
+      {/* Navigation Bar */}
+      <nav className="bg-white shadow sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <Link href="/" className="text-2xl font-bold text-blue-600">
+            FollowOn
           </Link>
-        </SignedIn>
+          <div className="space-x-6">
+            <a href="#features" className="text-gray-700 hover:text-blue-600">Features</a>
+            <a href="#pricing" className="text-gray-700 hover:text-blue-600">Pricing</a>
+            <SignedOut>
+              <SignInButton>
+                <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                  Sign In
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="min-h-screen flex flex-col-reverse md:flex-row justify-center items-center bg-blue-50 px-6 py-16">
+        <div className="text-center md:text-left md:w-1/2">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-blue-800">Never Miss a Follow-Up Again</h1>
+          <p className="text-lg text-gray-700 mb-6">
+            FollowOn reminds you exactly when to follow up with your customers. More conversions, less stress.
+          </p>
+          <SignedOut>
+            <SignInButton>
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                Get Started Free
+              </button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <Link href="/dashboard">
+              <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                Go to Dashboard
+              </button>
+            </Link>
+          </SignedIn>
+        </div>
+        <div className="md:w-1/2 mb-8 md:mb-0">
+          <Image
+            src="https://images.unsplash.com/photo-1581091215367-5c2cc5b4f43b"
+            alt="Hero"
+            width={600}
+            height={400}
+            className="rounded-xl shadow-lg"
+          />
+        </div>
       </section>
 
       {/* How It Works */}
@@ -52,7 +82,7 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section className="px-6 py-16 bg-gray-100 text-center">
+      <section id="features" className="px-6 py-16 bg-gray-100 text-center">
         <h2 className="text-3xl font-semibold mb-10">Features</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="p-6 bg-white rounded-xl shadow">
@@ -73,28 +103,33 @@ export default function HomePage() {
       {/* Screenshots / Demo */}
       <section className="px-6 py-16 text-center">
         <h2 className="text-3xl font-semibold mb-10">Screenshots</h2>
-        <img
-          src="https://images.unsplash.com/photo-1632203171951-5ec1e5c09b96?auto=format&fit=crop&w=800&q=80"
-          alt="App Screenshot"
-          className="mx-auto rounded-xl shadow max-w-md"
+        <Image
+          src="https://images.unsplash.com/photo-1581091210600-725b5b4117c1"
+          alt="Demo Screenshot"
+          width={800}
+          height={400}
+          className="mx-auto rounded-xl shadow"
         />
       </section>
 
       {/* Pricing */}
-      <section className="px-6 py-16 bg-white text-center">
+      <section id="pricing" className="px-6 py-16 bg-white text-center">
         <h2 className="text-3xl font-semibold mb-10">Simple Pricing</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-gray-100 p-6 rounded-xl shadow">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="bg-gray-100 p-8 rounded-xl shadow">
             <h3 className="text-xl font-bold">Free</h3>
-            <p className="text-gray-600">Track up to 10 follow-ups. Perfect for personal use.</p>
+            <p className="text-gray-600 mt-2">Up to 10 follow-ups per month</p>
+            <p className="mt-4 font-bold text-2xl">₹0</p>
           </div>
-          <div className="bg-blue-100 p-6 rounded-xl shadow">
-            <h3 className="text-xl font-bold">Pro – $8/month</h3>
-            <p className="text-gray-600">Track up to 200 follow-ups. For growing businesses.</p>
+          <div className="bg-gray-100 p-8 rounded-xl shadow">
+            <h3 className="text-xl font-bold">Pro</h3>
+            <p className="text-gray-600 mt-2">Up to 200 follow-ups</p>
+            <p className="mt-4 font-bold text-2xl">₹699/month</p>
           </div>
-          <div className="bg-green-100 p-6 rounded-xl shadow">
-            <h3 className="text-xl font-bold">Unlimited – $20/month</h3>
-            <p className="text-gray-600">Unlimited follow-ups. Best for teams and professionals.</p>
+          <div className="bg-gray-100 p-8 rounded-xl shadow">
+            <h3 className="text-xl font-bold">Unlimited</h3>
+            <p className="text-gray-600 mt-2">Unlimited follow-ups</p>
+            <p className="mt-4 font-bold text-2xl">₹1599/month</p>
           </div>
         </div>
       </section>

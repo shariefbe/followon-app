@@ -1,39 +1,59 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
+import { useEffect } from "react"
+import { useRouter } from "next/router"
 
 export default function Dashboard() {
+  const router = useRouter()
+
+  // Fix potential redirect issue after login
+  useEffect(() => {
+    const hash = window.location.hash
+    if (hash.includes("__clerk_db_jwt")) {
+      router.replace("/dashboard")
+    }
+  }, [])
+
   return (
     <>
       {/* If user is signed in */}
       <SignedIn>
-        <div className="min-h-screen bg-gray-100 px-4 py-12 flex items-start justify-between gap-8 relative">
+        <div className="min-h-screen bg-gray-100 px-4 py-12 flex items-center justify-center relative">
           {/* Logout Button */}
           <div className="absolute top-4 right-4">
             <UserButton afterSignOutUrl="/" />
           </div>
 
-          {/* Left Panel: Select Follow-up Type */}
-          <div className="bg-white rounded-2xl shadow-lg w-1/2 p-8">
-            <h1 className="text-2xl font-bold text-blue-700 mb-4">New Follow-Up</h1>
-            <div className="flex flex-col gap-4">
-              <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
-                Catalog Sent
+          <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-8">
+            <h1 className="text-2xl font-bold text-blue-700 mb-4">Add Customer Lead</h1>
+            <form className="space-y-4">
+              <input
+                type="text"
+                placeholder="Customer Name"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="tel"
+                placeholder="Mobile Number"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="date"
+                placeholder="Catalog Sent Date"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <select className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">Reminder After...</option>
+                <option value="3">3 Days</option>
+                <option value="5">5 Days</option>
+                <option value="7">7 Days</option>
+              </select>
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+              >
+                Save Lead
               </button>
-              <button className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition">
-                Bought Today
-              </button>
-              <button className="w-full bg-yellow-600 text-white py-2 rounded-md hover:bg-yellow-700 transition">
-                Payment Intimation
-              </button>
-            </div>
-          </div>
-
-          {/* Right Panel: Today's Follow-ups */}
-          <div className="bg-white rounded-2xl shadow-lg w-1/2 p-8">
-            <h1 className="text-2xl font-bold text-blue-700 mb-4">Today's Follow-ups</h1>
-            <ul className="space-y-4 text-gray-700">
-              <li>No follow-ups for today.</li>
-              {/* You can dynamically render follow-up items here in future */}
-            </ul>
+            </form>
           </div>
         </div>
       </SignedIn>

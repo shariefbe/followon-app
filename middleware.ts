@@ -6,12 +6,16 @@ export default authMiddleware({
     "/",
     "/sign-in",
     "/sign-up",
-    "/sign-up/verify-email-address",
+    "/sign-up/verify-email-address(.*)", // ✅ important fix
     "/api/webhook/clerk"
   ],
-  ignoredRoutes: ["/favicon.ico"]
+  ignoredRoutes: [
+    "/favicon.ico"
+  ]
 });
 
 export const config = {
-  matcher: ["/((?!_next|.*\\..*).*)"]
+  matcher: [
+    "/((?!_next|.*\\..*).*)"
+  ]
 };

@@ -2,7 +2,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useUser, useAuth, SignInButton, UserButton } from "@clerk/nextjs"
+import { useUser, useAuth } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 
@@ -40,14 +40,10 @@ export default function Dashboard() {
       })
       alert("Lead saved successfully!")
       setFormData({ name: "", phone: "", date: "", reminderDays: "" })
-    } catch (error: any) {
-      console.error("❌ API Error:", error?.response?.data || error.message)
+    } catch (error) {
+      console.error("❌ API Error:", error)
       alert("Failed to save lead")
     }
-  }
-
-  if (!isLoaded) {
-    return <div className="p-6 text-gray-600">Loading...</div>
   }
 
   return (

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import axios from "axios"
 
 export default function Dashboard() {
-  const { isSignedIn } = useAuth()
+  const { isSignedIn, isLoaded } = useAuth()
   const router = useRouter()
   const [followType, setFollowType] = useState("catalog")
   const [formData, setFormData] = useState({
@@ -17,11 +17,17 @@ export default function Dashboard() {
     reminderDays: ""
   })
 
+  // 🧠 Log to check dashboard is loading
   useEffect(() => {
-    if (!isSignedIn) {
+    console.log("✅ Dashboard page loaded")
+  }, [])
+
+  // ✅ Handle redirection only *after* Clerk has loaded
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
       router.push("/")
     }
-  }, [isSignedIn, router])
+  }, [isLoaded, isSignedIn, router])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -37,6 +43,7 @@ export default function Dashboard() {
       alert("Lead saved successfully!")
       setFormData({ name: "", phone: "", date: "", reminderDays: "" })
     } catch (error) {
+      console.error("❌ API Error:", error)
       alert("Failed to save lead")
     }
   }

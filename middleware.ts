@@ -1,4 +1,5 @@
-import { authMiddleware } from "@clerk/nextjs"
+// middleware.ts
+import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
   publicRoutes: [
@@ -6,9 +7,11 @@ export default authMiddleware({
     "/sign-in",
     "/sign-up",
     "/sign-up/verify-email-address",
-  ]
-})
+    "/api/webhook/clerk"
+  ],
+  ignoredRoutes: ["/favicon.ico"]
+});
 
 export const config = {
-  matcher: ["/((?!_next|.*\\..*).*)"],
-}
+  matcher: ["/((?!_next|.*\\..*).*)"]
+};

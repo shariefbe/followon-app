@@ -7,17 +7,13 @@ export default function HomePage() {
       {/* Navigation Bar */}
       <nav className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
-            FollowOn
-          </Link>
+          <Link href="/" className="text-2xl font-bold text-blue-600">FollowOn</Link>
           <div className="space-x-6 text-sm font-medium">
             <a href="#features" className="text-gray-700 hover:text-blue-600 transition duration-200">Features</a>
             <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition duration-200">Pricing</a>
             <SignedOut>
               <SignInButton>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200">
-                  Sign In
-                </button>
+                <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200">Sign In</button>
               </SignInButton>
             </SignedOut>
             <SignedIn>
@@ -36,25 +32,17 @@ export default function HomePage() {
           </p>
           <SignedOut>
             <SignInButton>
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-                Get Started Free
-              </button>
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">Get Started Free</button>
             </SignInButton>
           </SignedOut>
           <SignedIn>
             <Link href="/dashboard">
-              <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
-                Go to Dashboard
-              </button>
+              <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">Go to Dashboard</button>
             </Link>
           </SignedIn>
         </div>
         <div className="md:w-1/2 mb-8 md:mb-0">
-          <img
-            src="https://source.unsplash.com/featured/?business,reminder"
-            alt="Hero"
-            className="rounded-xl shadow-lg object-cover w-full max-w-md mx-auto"
-          />
+          {/* <img src="/images/hero.png" alt="Hero" className="rounded-xl shadow-lg object-cover w-full h-auto" /> */}
         </div>
       </section>
 
@@ -99,11 +87,7 @@ export default function HomePage() {
       {/* Screenshots / Demo */}
       <section className="px-6 py-16 text-center">
         <h2 className="text-3xl font-semibold mb-10">Screenshots</h2>
-        <img
-          src="https://source.unsplash.com/featured/?dashboard,analytics"
-          alt="Demo Screenshot"
-          className="mx-auto rounded-xl shadow object-cover w-full max-w-3xl"
-        />
+        {/* <img src="/images/demo.png" alt="Demo Screenshot" className="mx-auto rounded-xl shadow object-cover w-full max-w-3xl" /> */}
       </section>
 
       {/* Pricing */}

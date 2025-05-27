@@ -1,0 +1,14 @@
+/* Import Tailwind’s base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: Custom global styles */
+body {
+  @apply bg-gray-50 text-gray-800 font-sans;
+}
+
+/* Example for custom link style */
+a {
+  @apply text-blue-600 hover:text-blue-800 underline;
+}

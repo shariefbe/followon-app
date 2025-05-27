@@ -1,52 +1,87 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
+import { useState } from "react"
 
 export default function Dashboard() {
+  const [followUpType, setFollowUpType] = useState("")
+
   return (
     <>
-      {/* If user is signed in */}
       <SignedIn>
-        <div className="min-h-screen bg-gray-100 px-4 py-12 flex items-center justify-center relative">
-          {/* Logout Button */}
+        <div className="min-h-screen bg-gray-100 p-6 flex flex-col md:flex-row justify-between items-start gap-8">
+          {/* Logout */}
           <div className="absolute top-4 right-4">
             <UserButton afterSignOutUrl="/" />
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-8">
-            <h1 className="text-2xl font-bold text-blue-700 mb-4">Add Customer Lead</h1>
-            <form className="space-y-4">
-              <input
-                type="text"
-                placeholder="Customer Name"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="tel"
-                placeholder="Mobile Number"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="date"
-                placeholder="Catalog Sent Date"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <select className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="">Reminder After...</option>
-                <option value="3">3 Days</option>
-                <option value="5">5 Days</option>
-                <option value="7">7 Days</option>
-              </select>
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-              >
-                Save Lead
-              </button>
-            </form>
+          {/* Left side: Entry Form */}
+          <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-6">
+            <h1 className="text-2xl font-bold text-blue-700 mb-4">Customer Follow-Up</h1>
+
+            <label className="block mb-3 font-semibold text-gray-700">Select Follow-up Type:</label>
+            <select
+              value={followUpType}
+              onChange={(e) => setFollowUpType(e.target.value)}
+              className="w-full mb-6 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">-- Choose an option --</option>
+              <option value="catalog">Catalog Sent</option>
+              <option value="bought">Bought Today</option>
+              <option value="payment">Payment Intimation</option>
+            </select>
+
+            {followUpType === "catalog" && (
+              <form className="space-y-4">
+                <input type="text" placeholder="Customer Name" className="form-field" />
+                <input type="tel" placeholder="Mobile Number" className="form-field" />
+                <input type="date" placeholder="Catalog Sent Date" className="form-field" />
+                <select className="form-field">
+                  <option value="">Reminder After...</option>
+                  <option value="3">3 Days</option>
+                  <option value="5">5 Days</option>
+                  <option value="7">7 Days</option>
+                </select>
+                <button type="submit" className="submit-button">Save</button>
+              </form>
+            )}
+
+            {followUpType === "bought" && (
+              <form className="space-y-4">
+                <input type="text" placeholder="Customer Name" className="form-field" />
+                <input type="tel" placeholder="Mobile Number" className="form-field" />
+                <input type="date" placeholder="Purchase Date" className="form-field" />
+                <select className="form-field">
+                  <option value="">Follow-up After...</option>
+                  <option value="7">7 Days</option>
+                  <option value="15">15 Days</option>
+                  <option value="30">30 Days</option>
+                </select>
+                <button type="submit" className="submit-button">Save</button>
+              </form>
+            )}
+
+            {followUpType === "payment" && (
+              <form className="space-y-4">
+                <input type="text" placeholder="Customer Name" className="form-field" />
+                <input type="tel" placeholder="Mobile Number" className="form-field" />
+                <input type="date" placeholder="Promised Payment Date" className="form-field" />
+                <button type="submit" className="submit-button">Save</button>
+              </form>
+            )}
+          </div>
+
+          {/* Right side: Today’s Follow-ups */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 w-full md:max-w-md">
+            <h2 className="text-xl font-semibold text-blue-700 mb-4">Today's Follow-ups</h2>
+            <p className="text-gray-600 mb-2">You have 3 follow-ups today:</p>
+            <ul className="list-disc pl-6 text-sm text-gray-800">
+              <li>Follow up with Priya (Catalog Sent - 5 days ago)</li>
+              <li>Reminder for Kumar (Bought 15 days ago)</li>
+              <li>Check payment from Meena (Payment promised today)</li>
+            </ul>
           </div>
         </div>
       </SignedIn>
 
-      {/* If user is not signed in */}
       <SignedOut>
         <div className="min-h-screen bg-white flex items-center justify-center">
           <div className="text-center">
@@ -55,6 +90,32 @@ export default function Dashboard() {
           </div>
         </div>
       </SignedOut>
+
+      <style jsx>{`
+        .form-field {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          border: 1px solid #ccc;
+          border-radius: 0.375rem;
+          outline: none;
+          transition: border-color 0.2s;
+        }
+        .form-field:focus {
+          border-color: #3b82f6;
+        }
+        .submit-button {
+          width: 100%;
+          background-color: #2563eb;
+          color: white;
+          padding: 0.5rem;
+          border-radius: 0.375rem;
+          font-weight: 600;
+          transition: background-color 0.2s;
+        }
+        .submit-button:hover {
+          background-color: #1d4ed8;
+        }
+      `}</style>
     </>
   )
 }
